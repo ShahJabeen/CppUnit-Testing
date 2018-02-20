@@ -1,0 +1,66 @@
+
+#include "IntVector.h"
+#include <cassert>
+
+using namespace std;
+// Given a sorted vector, it tries to find an item in the
+// the vector using binary search.
+//
+// \param[in] item the item to search for
+// \param[out] index the index of the element if found, or the index
+// to insert the element if not found
+// \return true if item is found, and false otherwise.
+// \pre the vector is sorted
+// \post if the item is found, then (*this)[index] == item. If it is
+// not found, then index is the place item should be inserted into the
+// vector:
+//
+// ie. (*this)[i] <= item for 0 <= i < index
+//item < (*this)[i] for index <= i < size()
+// \throw invalid_argument if the vector is not sorted.
+
+bool IntVector::binsearch(int item, size_type & index)
+   const throw(invalid_argument)
+{
+   
+   const vector<int> &A = *this;
+   int n = size();
+   
+#ifndef NDEBUG
+// check that the vector is sorted
+   for (size_type i = 1; i < size(); i++)
+   {
+      if (A[i-1] > A[i])
+      {
+	 throw invalid_argument("IntVector not sorted.");
+      }
+   }
+#endif
+   if (n <= 0 || item < A[0])
+   { // check the first element, but only if it exists
+      index = 0;
+      return false;
+   }
+   if (A[n-1] < item)
+   {
+      index = n;
+      return false;
+   }
+   if (item == A[n-1])
+   {
+      index = n-1;
+      return true;
+   }
+   
+   int l = 0;
+   int u = n-1;
+   while (l+1 < u)
+   {
+// variant: u - l
+#ifndef NDEBUG
+      int old_variant = u - l;
+      assert(old_variant >= 0);  
+#endif
+   }
+
+}
